@@ -1,0 +1,158 @@
+<html lang="en" xmlns="http.//www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Ebusiness Calculator</title>
+        <link rel="stylesheet" href="homepagestyle.css" type="text/css" />
+    </head>
+        <body>
+            <style>
+                body{
+                    background-color: cream;
+                    font-family: Times New Roman;
+                }
+             
+                div {
+                    background-color: #00000;
+                    color:blue ;
+                    width: 300px;
+                    border: 25px solid #6b0f1a;
+                    padding: 25px;
+                    margin: 25px;
+                  }
+ 
+ .back { position: absolute;
+ top: 0;
+ left: 0;
+ text-align: center;
+ display: block; padding: 7px;
+ width: 100%;
+ box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ background:#3d3d3d;
+ font-weight: bold; font-size: 13px;
+ color: #888;
+ -webkit-transition: all 200ms ease-out;
+ -moz-transition: all 200ms ease-out;
+ -o-transition: all 200ms ease-out;
+ transition: all 200ms ease-out;
+ }
+ .back:hover {
+ background: #eee;
+  }
+             
+            </style>
+<a class="back" href="aboutconsulting.html">Back to About Consulting Page</a>
+        <center>
+        <div class="form">
+            <form name="intCalc" method="post" action="eBus2.php">
+                <center>
+            <h1>Consulting Fee</h1>  
+                </center>
+        <hr/>
+        <center>
+            <table cellspacing="10">
+                <tr>
+                    <td><b>Type of consulting</b></td>
+                </tr>
+                <tr>
+                    <td>Hyperautomation @ $200</td>
+                    <td><input type="radio" id="Hyperautomation" name="rdoGroup" value="200"  required /></td>
+                </tr>
+                <tr>
+                    <td>Multiexperience @ $500</td>
+                    <td><input type="radio" id="Multiexperience" name="rdoGroup" value="500"  /></td>
+                </tr>
+                <tr>
+                    <td>Distributed Cloud @ $1000</td>
+                    <td><input type="radio" id="DistributedCloud" name="rdoGroup" value="1000" /></td>
+                </tr>
+            </table>
+        </center>
+        <br/>
+            <center>
+                 <table cellspacing="10">
+            <tr>
+                    <td><b></b></td>
+                    <td><b>Amount</b></td>
+            </tr>
+                <tr>
+                    <td>Sub Total</td>
+                    <td><input type="text" id="txtSubTot" name="txtSub" readonly  required/></td>
+                </tr>
+                <tr>
+                    <td>Discount @ 5%</td>
+                    <td><input type="text" id="txtDisc" name="txtDisc" readonly  required/></td>
+                </tr>
+                <tr>
+                    <td>+ VAT @ 20%</td>
+                    <td><input type="text" id="txtVAT" name="txtVAT" readonly required /></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><input type="text" id="txtTotal" name="txtTotal" value="" readonly required/></td>
+                </tr>
+            </table>
+        </center>
+     
+        <br />
+            <center>
+            <input type="button" name="btnCalc" id="btnCalc" onclick="calcSub()" value="Calculate Amount"/>
+            <input type="button" name="btnClear" id="btnClear" onclick="AmountClear()" value="Clear"/>
+           
+         
+        </center>
+            </form>
+        </div>
+        </center>
+            <script type="text/javascript">
+                function calcSub(){
+                    
+                    var subAmount = parseFloat(document.getElementById('txtSubTot').value);
+                    var Hyperautomation = parseFloat(document.getElementById('Hyperautomation').value);
+                    var Multiexperience = parseFloat(document.getElementById('Multiexperience').value);
+                    var DistributedCloud = parseFloat(document.getElementById('DistributedCloud').value);
+                 
+                   
+                    if (document.getElementById('Hyperautomation').checked) {
+                        document.intCalc.txtSubTot.value = Hyperautomation;
+                        subAmount = Hyperautomation;
+                        calculation(subAmount);
+                     
+                    }
+                   else if (document.getElementById('Multiexperience').checked) {
+                        document.intCalc.txtSubTot.value = Multiexperience;
+                        subAmount = Multiexperience;
+                        calculation(subAmount);
+                     
+                    }
+                    else if (document.getElementById('DistributedCloud').checked) {
+                        document.intCalc.txtSubTot.value = DistributedCloud;
+                        subAmount = DistributedCloud;
+                        calculation(subAmount);
+                    }
+                }
+             
+               
+                function calculation(parmsTotal) {
+                    var subTotal = parseFloat(parmsTotal);
+                    var discCalc = parseFloat(subTotal * .05);
+                    var vatCalc= parseFloat(subTotal * .20);  
+                    var total = parseFloat(subTotal - discCalc + vatCalc);
+                 
+                    
+                    document.intCalc.txtDisc.value = discCalc;
+                    document.intCalc.txtVAT.value = vatCalc;
+                    document.intCalc.txtTotal.value = total;
+                }
+             
+                function AmountClear() {
+                    document.getElementById("txtSubTot").value="";
+                    document.getElementById("txtDisc").value="";
+                    document.getElementById("txtVAT").value="";
+                    document.getElementById("txtTotal").value="";
+                }
+                 
+            </script>
+    </body>
+    </html>
